@@ -1,5 +1,6 @@
 import flask
 import pickle
+import pandas as pd
 
 with open(f'model/bike_model_xgboost.pkl', 'rb') as f:model = pickle.load(f)
 
@@ -11,22 +12,28 @@ def main():
     if flask.request.method == 'GET':
     	return(flask.render_template('main.html'))
     if flask.request.method == 'POST':
-        temperature = flask.request.form['temperature']
-        humidity = flask.request.form['humidity']
-        windspeed = flask.request.form['windspeed']
+        Principal = flask.request.form['Principal']
+        terms = flask.request.form['terms']
+        age = flask.request.form['age']
         Gender = flask.request.form['Gender']
         weekend= flask.request.form['weekend']
+        Bachelor= flask.request.form['Bachelor']
+        HighSchoolorBelow= flask.request.form['HighSchoolorBelow']
+        college=flask.request.form['college']
         
-        input_variables = pd.DataFrame([[temperature, humidity, windspeed,Gender,weekend]],
-                                       columns=['temperature', 'humidity', 'windspeed','Gender','weekend'],
-                                       dtype=float)
+        input_variables = pd.DataFrame([[Principal, terms, age,Gender,weekend,Bachelor,HighSchoolorBelow,college]],
+        columns=['Principal', 'terms', 'age','Gender','weekend','Bachelor','HighSchoolorBelow','college'],
+                                       dtype=int)
         prediction = model.predict(input_variables)[0]
         return flask.render_template('main.html',
-                                     original_input={'Temperature':temperature,
-                                                     'Humidity':humidity,
-                                                     'Windspeed':windspeed,
-                                                     'GENDER':gender, 
-                                                     'WEEKEND':weekend},                                     
+                                     original_input={'Principal':Principal,
+                                                     'terms':terms,
+                                                            'age':age,
+                                                     'Gender':Gender, 
+                                                     'weekend':weekend,
+                                                     'Bachelor':Bachelor,
+                                                     'HighSchoolorBelow':HighSchoolorBelow,
+                                                     'college':college},                                     
                                                      result=prediction,)
 
 

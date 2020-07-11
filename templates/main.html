@@ -14,25 +14,34 @@ form {
 </style>
 
 <head>
-    <title>Bike Usage Model</title>
+    <title>Loan Status Prediction Model</title>
 </head>
 <form action="{{ url_for('main') }}" method="POST">
     <fieldset>
         <legend>Input values:</legend>
-        Temperature:
-        <input name="temperature" type="number" required>
+        Principal:
+        <input name="Principal" type="number" required>
         <br>
-        <br> Humidity:
-        <input name="humidity" type="number" required>
+        <br> terms:
+        <input name="terms" type="number" required>
         <br>
-        <br> Windspeed:
-        <input name="windspeed" type="number" required>
+        <br> age:
+        <input name="age" type="number" required>
         <br>
-        <br> GENDER:
-        <input name="gender" type="number" required>
+       <br> Gender:
+        <input name="Gender" type="number" required>
         <br>
-        <br> WEEKEND:
+        <br> weekend:
         <input name="weekend" type="number" required>
+        <br>
+         <br>Bachelor:
+        <input name="Bachelor" type="number" required>
+        <br>
+         <br> HighSchoolorBelow:
+        <input name="HighSchoolorBelow" type="number" required>
+        <br>
+         <br> college:
+        <input name="college" type="number" required>
         <br>
         <input type="submit">
     </fieldset>
@@ -44,7 +53,7 @@ form {
     		<b>{{ variable }}</b> : {{ value }}
     	{% endfor %}
 		<br>
-    	<br> Predicted number of bikes in use:
+    	<br> Predicted Loan Status:
    		<p style="font-size:50px">{{ result }}</p>
     {% endif %}
 </div>
